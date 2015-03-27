@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>1826FF9C-A449-4C4D-A43B-D0944526E7A8</string>
+	<key>IDESourceControlProjectName</key>
+	<string>IKEABump</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>8AB9D26D4C5F5C9C4CEF883250A3F5907372E74B</key>
+		<string>https://github.com/lloydkeijzer/IKEABump.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>app/platforms/ios/IKEABump.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>8AB9D26D4C5F5C9C4CEF883250A3F5907372E74B</key>
+		<string>../../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/lloydkeijzer/IKEABump.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>8AB9D26D4C5F5C9C4CEF883250A3F5907372E74B</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>8AB9D26D4C5F5C9C4CEF883250A3F5907372E74B</string>
+			<key>IDESourceControlWCCName</key>
+			<string>IKEABump</string>
+		</dict>
+	</array>
+</dict>
+</plist>
