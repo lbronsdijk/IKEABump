@@ -18,8 +18,10 @@ var app = {
     onDeviceReady: function() {
         console.log('Device is ready!');
     },
-    loadScreen: function(screen){
-        $(".screen").load(screen, this.initDOM());
+    loadScreen: function(url){
+        var screen = $('.screen');
+        screen.innerHTML = '';
+        screen.load(url, this.initDOM());
     },
     initDOM: function () {
         /*
