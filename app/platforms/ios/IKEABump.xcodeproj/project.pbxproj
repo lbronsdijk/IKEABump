@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		03A555CF1063477FADA97270 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ACA33642FB204FD287ADB52B /* CoreBluetooth.framework */; };
 		03F9D4B7FB4B4749BDA3782A /* MEGBluetoothSerial.m in Sources */ = {isa = PBXBuildFile; fileRef = BD6DB981B0F04962A5C06471 /* MEGBluetoothSerial.m */; };
@@ -439,8 +438,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Lloyd Keijzer (N73RY8Q95E)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Lloyd Keijzer (N73RY8Q95E)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -473,8 +472,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Lloyd Keijzer (N73RY8Q95E)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Lloyd Keijzer (N73RY8Q95E)";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "IKEABump/IKEABump-Prefix.pch";
