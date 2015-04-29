@@ -1,0 +1,171 @@
+html {
+    -webkit-font-smoothing: antialiased !important;
+}
+body {
+    background: #000;
+    font-family: 'Open Sans', sans-serif;
+}
+.app {
+    position: relative;
+    margin: 0 auto;
+    padding: 3px;
+    background: #0b5aa3;
+    color: #fff;
+    width: 272px;
+    height: 340px;
+    border-radius: 10px;
+    box-sizing: border-box;
+
+}
+.navigation {
+    float: left;
+}
+.navigation .navigation-icon {
+    width: 30px;
+    height: 30px;
+}
+.time {
+    float: right;
+}
+.time span {
+    display: inline-block;
+    margin-top: 3px;
+    opacity: 0.7;
+}
+
+footer {
+    height: 35px;
+    background: #083e71;
+    border-radius: 10px;
+    padding: 7px;
+    box-sizing: border-box;
+}
+footer span {
+    font-weight: 700;
+}
+footer .text {
+    font-size: 14px;
+}
+footer .total-price {
+    font-size: 18px;
+    float: right;
+}
+
+/* Swiper */
+.swiper-container {
+    margin:0 auto;
+    position:relative;
+    overflow:hidden;
+    -webkit-backface-visibility:hidden;
+    -moz-backface-visibility:hidden;
+    -ms-backface-visibility:hidden;
+    -o-backface-visibility:hidden;
+    backface-visibility:hidden;
+    /* Fix of Webkit flickering */
+    z-index:1;
+}
+.swiper-wrapper {
+    position:relative;
+    width:100%;
+    -webkit-transition-property:-webkit-transform, left, top;
+    -webkit-transition-duration:0s;
+    -webkit-transform:translate3d(0px,0,0);
+    -webkit-transition-timing-function:ease;
+    
+    -moz-transition-property:-moz-transform, left, top;
+    -moz-transition-duration:0s;
+    -moz-transform:translate3d(0px,0,0);
+    -moz-transition-timing-function:ease;
+    
+    -o-transition-property:-o-transform, left, top;
+    -o-transition-duration:0s;
+    -o-transform:translate3d(0px,0,0);
+    -o-transition-timing-function:ease;
+    -o-transform:translate(0px,0px);
+    
+    -ms-transition-property:-ms-transform, left, top;
+    -ms-transition-duration:0s;
+    -ms-transform:translate3d(0px,0,0);
+    -ms-transition-timing-function:ease;
+    
+    transition-property:transform, left, top;
+    transition-duration:0s;
+    transform:translate3d(0px,0,0);
+    transition-timing-function:ease;
+
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+}
+.swiper-free-mode > .swiper-wrapper {
+    -webkit-transition-timing-function: ease-out;
+    -moz-transition-timing-function: ease-out;
+    -ms-transition-timing-function: ease-out;
+    -o-transition-timing-function: ease-out;
+    transition-timing-function: ease-out;
+    margin: 0 auto;
+}
+.swiper-slide {
+    float: left;
+    text-align: center;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+}
+.swiper-slide .product-name,
+.swiper-slide .price {
+    display: block;
+}
+.swiper-slide .product-name {
+    font-weight: 700;
+    font-size: 18px;
+}
+.swiper-slide .mask {
+    display: inline-block;
+    height: 150px;
+    width: 150px;
+    margin: 20px 0 20px 0;
+    border: 1px #fbe00b solid;
+    border-radius: 50%;
+}
+.swiper-slide .mask img {
+    margin-top: 7px;
+    margin-left: 1px;
+    height: 135px;
+    width: auto;
+    border-radius: 50%;
+}
+.swiper-slide .price {
+    font-size: 21px;
+}
+.swiper-container, .swiper-slide {
+    width: 100%;
+    max-height: 264px;
+}
+
+/* IE10 Windows Phone 8 Fixes */
+.swiper-wp8-horizontal {
+    -ms-touch-action: pan-y;
+}
+.swiper-wp8-vertical {
+    -ms-touch-action: pan-x;
+}
+
+div:before,
+div:after, {
+  content:"";
+  display:table;
+}
+div:after {
+  clear:both;
+}
+div {
+  zoom:1; /* For IE 6/7 (trigger hasLayout) */
+}
+.clearfix:after {
+   content: " "; /* Older browser do not support empty content */
+   visibility: hidden;
+   display: block;
+   height: 0;
+   clear: both;
+}
