@@ -64,14 +64,14 @@ function initApp()
                     amount += parseFloat(this.price.amount.replace(',', '.'));
                 });
 
-                
+                $('.total-price').html('€ ' + amount.toString().replace('.', ','));
 
                 var productSlider = products.swiper({
                     mode:'horizontal',
                     loop: false
                 });
             },
-            addItem: function() {
+            removeItem: function() {
                 
             }
         }
