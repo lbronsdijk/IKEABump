@@ -12,52 +12,45 @@
         <script src="resources/js/app.js"></script>
 
         <link rel="stylesheet" href="resources/css/normalize.css">
+        <link rel="stylesheet" href="resources/css/animate.css">
         <link rel="stylesheet" href="resources/css/app.css">
     </head>
     <body>
         <section class="app">
+            <section class="splashscreen">
+            </section>
             <header class="clearfix">
                 <div class="navigation">
-                    <img class="navigation-icon svg" src="resources/svg/menu.svg" />
+                    <img class="navigation-icon" src="resources/svg/menu.svg" />
                     <div class="navigation-container">
-                        
+                        <nav>
+                            <li class="lost animated bounceIn"><img src="resources/svg/lost.svg" /></li>
+                            <li class="food animated bounceIn"><img src="resources/svg/food.svg" /></li>
+                        </nav>
+                        <div class="spinner">
+                            <div class="bounce1"></div>
+                            <div class="bounce2"></div>
+                            <div class="bounce3"></div>
+                        </div>
+                        <img class="find-bumpie" src="resources/svg/direction.svg" />
                     </div>
                 </div>
                 <div class="time">
                     <span>10:45</span>
                 </div>
             </header>
-            <section class="product-slider blur">
-                <div class="swiper-container products">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <span class="product-name">Poang</span>
-                            <div class="mask">
-                                <img src="resources/images/chair.jpg">
-                            </div>
-                            <span class="price">€24,95 <small>p.s.</small></span>
-                        </div>
-                        <div class="swiper-slide">
-                            <span class="product-name">Poang</span>
-                            <div class="mask">
-                                <img src="resources/images/chair.jpg">
-                            </div>
-                            <span class="price">€24,95 <small>p.s.</small></span>
-                        </div>
-                        <div class="swiper-slide">
-                            <span class="product-name">Poang</span>
-                            <div class="mask">
-                                <img src="resources/images/chair.jpg">
-                            </div>
-                            <span class="price">€24,95 <small>p.s.</small></span>
+            <section class="app-container">
+                <section class="product-slider">
+                    <div class="swiper-container products">
+                        <div class="swiper-wrapper">
                         </div>
                     </div>
-                </div>
+                </section>
+                <footer>
+                    <span class="text">Totaal</span>
+                    <span class="total-price">€301,78,-</span>
+                </footer>
             </section>
-            <footer>
-                <span class="text">Totaal</span>
-                <span class="total-price">€128,-</span>
-            </footer>
         </section>
     </body>
 </html>

@@ -24,11 +24,81 @@ function initApp()
             FastClick.attach(document.body);
         });
 
+        $('.splashscreen').click(function() {
+            $(this).fadeOut(function(){
+                this.remove();
+            });
+        });
 
-        var products = $('.swiper-container');
-        var productSlider = products.swiper({
-            mode:'horizontal',
-            loop: false
+        var shopping = {
+            initialize: function() {
+                var json;
+                var products = $('.swiper-container');
+
+                $('.swiper-wrapper').empty();
+
+                $.ajax({
+                    type: 'GET',
+                    async: false,
+                    url: 'resources/products.json',
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    success: function (data) {
+                        json = data;
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        console.log('Request shoppinglist failed: ' + errorThrown);
+                    }
+                });
+
+                var amount = 0;
+
+                $.each(json, function() {
+                    var itemNode = '<div class="swiper-slide" id="' + this.id + '">' +
+                                   '<span class="product-name">' + this.name + '</span>' +
+                                   '<div class="mask"><img src="resources/images/' + this.image + '"></div>' +
+                                   '<span class="price">€' + this.price.amount + ' <small>p.s.</small></span>' +
+                                   '</div>';
+                    $('.swiper-wrapper').append(itemNode);
+
+                    amount += parseFloat(this.price.amount.replace(',', '.'));
+                });
+
+                
+
+                var productSlider = products.swiper({
+                    mode:'horizontal',
+                    loop: false
+                });
+            },
+            addItem: function() {
+                
+            }
+        }
+
+        shopping.initialize();
+
+        $('.navigation-icon').click(function() {
+            $('.navigation-container').fadeToggle('fast', 'linear', function(){
+
+            });
+            $('.app-container').toggleClass('blur');
+        });
+        $('.lost').click(function() {
+            $('.lost, .food').removeClass('bounceIn').addClass('bounceOut');
+            $('.lost').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+                $('.spinner').show();
+                setTimeout(function() {
+                    $('.spinner').hide(0,'', function(){
+                        $('.find-bumpie').show();
+                    });
+
+                }, 3000);
+            });
+        });
+
+        $('.food').click(function() {
+            window.open('http://wessalicious.com/wp-content/uploads/2014/12/Vegetarische-zweedse-balletjes2.jpg');
         });
 
         /*
@@ -60,7 +130,6 @@ function initApp()
                 $img.replaceWith($svg);
 
             }, 'xml');
-
         });
     })
 }
