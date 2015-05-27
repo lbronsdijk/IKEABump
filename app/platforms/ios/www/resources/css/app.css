@@ -1,9 +1,15 @@
 html {
     -webkit-font-smoothing: antialiased !important;
+    -webkit-backface-visibility: hidden;
+    -webkit-transform: translateZ(0) scale(1.0, 1.0);
 }
 body {
     background: #000;
     font-family: 'Open Sans', sans-serif;
+}
+
+.ui-overlay-a, .ui-page-theme-a, .ui-page-theme-a .ui-panel-wrapper {
+    background: #000!important;
 }
 .app {
     position: relative;
@@ -15,16 +21,109 @@ body {
     height: 340px;
     border-radius: 10px;
     box-sizing: border-box;
-
+    overflow: hidden;
 }
+
+.splashscreen {
+    position: absolute;
+    width: 98%;
+    height: 98%;
+    background: url(../images/splashscreen.png) #0b5aa3 no-repeat center center;
+    z-index: 4;
+    cursor: pointer;
+}
+
 .navigation {
     float: left;
 }
+.navigation .navigation-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+    display: none;
+}
 .navigation .navigation-icon {
+    position: relative;
+    z-index: 2;
     width: 30px;
     height: 30px;
+    cursor: pointer;
 }
+
+nav {
+    margin-top: 50px;
+    text-align: center;
+}
+nav li {
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    list-style-type: none;
+    width: 80px;
+    height: 80px;
+    border: 1px #fbe00b solid;
+    border-radius: 50%;
+    cursor: pointer;
+}
+nav li:last-child {
+    margin-bottom: 0;
+}
+nav li img {
+    margin-top: 13px;
+    margin-left: 3px;
+}
+nav li.lost img {
+    width: 50px;
+    height: 50px;
+}
+
+nav li.food img {
+    width: 50px;
+    height: 50px;
+}
+
+.find-bumpie {
+    position: absolute;
+    left: 50%;  
+    top: 120px;
+    margin-left: -30px;   
+    width: 70px;
+    text-align: center;
+    display: none;
+}
+
+.spinner {
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    width: 70px;
+    text-align: center;
+    display: none;
+}
+
+.spinner > div {
+    width: 18px;
+    height: 18px;
+    background-color: #fbe00b;
+
+    border-radius: 100%;
+    display: inline-block;
+    -webkit-animation: bouncedelay 1.4s infinite ease-in-out;
+    animation: bouncedelay 1.4s infinite ease-in-out;
+    /* Prevent first frame from flickering when animation starts */
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
 .time {
+    position: relative;
+    z-index: 2;
     float: right;
 }
 .time span {
@@ -49,6 +148,12 @@ footer .text {
 footer .total-price {
     font-size: 18px;
     float: right;
+}
+
+.blur {
+    filter: blur(20px);
+    filter: url(../svg/blur.svg#gaussian_blur);
+    -webkit-filter: blur(20px);
 }
 
 /* Swiper */
@@ -151,6 +256,7 @@ footer .total-price {
     -ms-touch-action: pan-x;
 }
 
+/* fixes */
 div:before,
 div:after, {
   content:"";
@@ -168,4 +274,13 @@ div {
    display: block;
    height: 0;
    clear: both;
+}
+
+.app {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }

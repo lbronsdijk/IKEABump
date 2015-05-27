@@ -1,0 +1,38 @@
+[
+    {
+        "id": "1",
+        "name": "Poang",
+        "image": "chair.jpg",
+        "price": 
+            {
+                "amount" : "34,95"
+            }
+    },
+    {
+        "id": "2",
+        "name": "MALM",
+        "image": "bed.jpg",
+        "price": 
+            {
+                "amount" : "145,95"
+            }
+    },
+    {
+        "id": "3",
+        "name": "Harry",
+        "image": "table.jpg",
+        "price": 
+            {
+                "amount" : "98,98"
+            }
+    },
+    {
+        "id": "4",
+        "name": "CookieMonster",
+        "image": "trashbin.jpg",
+        "price": 
+            {
+                "amount" : "21,90"
+            }
+    }
+]

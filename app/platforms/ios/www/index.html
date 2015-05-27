@@ -1,34 +1,58 @@
 <!doctype html>
 <html lang="nl">
-<head>
-    <meta charset="utf-8" />
-    <meta name="format-detection" content="telephone=no" />
-    <meta name="msapplication-tap-highlight" content="no" />
-    <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
-    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>IKEA BUMP</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <link rel="apple-touch-icon" href="#">
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:700,300,400' rel='stylesheet' type='text/css'>
-    <script src="resources/js/vendor/modernizr.js"></script>
-    <script src="resources/js/app.js"></script>
-    <link rel="stylesheet" href="resources/css/normalize.css">
-    <link rel="stylesheet" href="resources/css/app.css">
-</head>
-<body>
-<section class="app">
-    <header class="clearfix">
-        <div class="navigation">
-            <img class="navigation-icon svg" src="resources/svg/menu.svg" />
-        </div>
-        <div class="time">
-            <span>10:45</span>
-        </div>
-    </header>
-    <section class="screen"></section>
-</section>
-<script type="text/javascript" src="cordova.js"></script>
-</body>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="msapplication-tap-highlight" content="no" />
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />
+        <meta http-equiv="x-ua-compatible" content="ie=edge" />
+        <title>IKEA BUMP</title>
+        <link rel="apple-touch-icon" href="#" />
+        <link rel="stylesheet" href="resources/css/normalize.css" />
+        <link rel="stylesheet" href="resources/css/animate.css" />
+        <link rel="stylesheet" href="resources/css/jquery.mobile-1.4.5.min.css" />
+        <link rel="stylesheet" href="resources/css/app.css" />
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:700,300,400' rel='stylesheet' type='text/css' />
+        <script src="resources/js/vendor/modernizr.js"></script>
+        <script src="resources/js/app.js"></script>
+    </head>
+    <body>
+        <section class="app">
+            <section class="splashscreen">
+            </section>
+            <header class="clearfix">
+                <div class="navigation">
+                    <img class="navigation-icon" src="resources/svg/menu.svg" />
+                    <div class="navigation-container">
+                        <nav>
+                            <li class="lost animated bounceIn"><img src="resources/svg/lost.svg" /></li>
+                            <li class="food animated bounceIn"><img src="resources/svg/food.svg" /></li>
+                        </nav>
+                        <div class="spinner">
+                            <div class="bounce1"></div>
+                            <div class="bounce2"></div>
+                            <div class="bounce3"></div>
+                        </div>
+                        <img class="find-bumpie" src="resources/svg/direction.svg" />
+                    </div>
+                </div>
+                <div class="time">
+                    <span>10:45</span>
+                </div>
+            </header>
+            <section class="app-container">
+                <section class="product-slider">
+                    <div class="swiper-container products">
+                        <div class="swiper-wrapper">
+                        </div>
+                    </div>
+                </section>
+                <footer>
+                    <span class="text">Totaal</span>
+                    <span class="total-price"></span>
+                </footer>
+            </section>
+        </section>
+        <script type="text/javascript" src="cordova.js"></script>
+    </body>
 </html>
