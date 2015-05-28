@@ -8,6 +8,7 @@ Modernizr.load(
     ],
     complete: function()
     {
+        // Init app
         this.app.initialize();
     }
 });
@@ -15,21 +16,17 @@ Modernizr.load(
 var app = { 
     initialize: function() {
 
+        // Init shopping bag
         shopping.initialize();
 
         $(document).ready(function()
         {   
-            /*
-             * Set fast scroll for mobile devices.
-             * Removes delay on click.
-             */
+            // Set fast scroll for mobile devices. Removes delay on click.
             $(function() {
                 FastClick.attach(document.body);
             });
 
-            /*
-             * Replace all SVG images with inline SVG
-             */
+            // Replace all SVG images with inline SVG
             $('img.svg').each(function(){
                 var $img = jQuery(this);
                 var imgID = $img.attr('id');
@@ -57,19 +54,24 @@ var app = {
 
                 }, 'xml');
             });
-
+        
+            // Click event for splashscreen
             $('.splashscreen').click(function() {
                 $(this).fadeOut(function(){
                     this.remove();
                 });
             });
 
+            // Click event for mini navigation
             $('.navigation-icon').click(function() {
-                $('.navigation-container').fadeToggle('fast', 'linear', function(){
-
+                $('.navigation-container').fadeToggle('fast', 'linear', function() {
+                    // Do nothing
                 });
+                // Blur app container when mini navigation active
                 $('.app-container').toggleClass('blur');
             });
+
+            // Click event for lost method
             $('.lost').click(function() {
                 $('.lost, .food').removeClass('bounceIn').addClass('bounceOut');
                 $('.lost').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
@@ -96,8 +98,10 @@ var shopping = {
         var products = $('.swiper-container');
         var amount = 0;
 
+        // Clear out shopping list
         $('.swiper-wrapper').empty();
 
+        // Get some data
         $.ajax({
             type: 'GET',
             async: false,
@@ -112,27 +116,49 @@ var shopping = {
             }
         });
 
+        // Loop data
         $.each(json, function() {
             var itemNode = '<div class="swiper-slide" id="' + this.id + '">' +
                            '<span class="product-name">' + this.name + '</span>' +
                            '<div class="mask"><img src="resources/images/' + this.image + '"></div>' +
                            '<span class="price">€' + this.price.amount + ' <small>p.s.</small></span>' +
                            '</div>';
+
+            // Append HTML node
             $('.swiper-wrapper').append(itemNode);
 
+            // Fill and count total amount 
             amount += parseFloat(this.price.amount.replace(',', '.'));
         });
 
+        // Update total price
         $('.total-price').html('€ ' + amount.toString().replace('.', ','));
 
+        // Fill amount object
         this.amount = amount;
+        // Fill and call product slider object
         this.productSlider = products.swiper({
             mode:'horizontal',
             loop: false
         });
     },
-    removeItem: function() {
-        console.log('derp');
-        //$('.swiper-slide#1').remove();
+    removeItem: function(id) {
+        // Check if id is empty
+        if(!id) {
+            console.log('No id entered');
+
+            return false;
+        }
+
+        // Find current product item node
+        var productItem = $('.swiper-slide#' + id);
+        var 
+        
+        // Kill it with fire
+        productItem.remove();
+
+        console.log('Product item ' + id + ' removed');
+
+        return true;
     }
 }
