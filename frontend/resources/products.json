@@ -1,6 +1,6 @@
 [
     {
-        "id": "1",
+        "id": "0",
         "name": "Poang",
         "image": "chair.jpg",
         "price": 
@@ -9,7 +9,7 @@
             }
     },
     {
-        "id": "2",
+        "id": "1",
         "name": "MALM",
         "image": "bed.jpg",
         "price": 
@@ -18,7 +18,7 @@
             }
     },
     {
-        "id": "3",
+        "id": "2",
         "name": "Harry",
         "image": "table.jpg",
         "price": 
@@ -27,7 +27,7 @@
             }
     },
     {
-        "id": "4",
+        "id": "3",
         "name": "CookieMonster",
         "image": "trashbin.jpg",
         "price": 
