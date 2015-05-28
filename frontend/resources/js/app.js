@@ -185,6 +185,9 @@ var shopping = {
         // Kill it with fire
         this.productSlider.removeSlide(id);
 
+        // Go to last slide
+        this.productSlider.slidePrev();
+
         console.log('Product item ' + id + ' removed');
 
         return true;
