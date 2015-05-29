@@ -23,7 +23,10 @@ Modernizr.load(
 /*
  * Basic app logic
  */
-var app = { 
+var app = {
+    /*
+     * Initialize app
+     */
     initialize: function() {
 
         // Init shopping bag
@@ -98,14 +101,18 @@ var app = {
             $('.food').click(function() {
                 window.open('http://wessalicious.com/wp-content/uploads/2014/12/Vegetarische-zweedse-balletjes2.jpg');
             });
-        })
+        });
     }
-}
+};
 
 /*
  * Shopping logic
  */
-var shopping = { 
+var shopping = {
+
+    /*
+     * Initialize shopping card
+     */
     initialize: function() {
         var amount = 0;
         var json;
@@ -161,9 +168,13 @@ var shopping = {
         // Fill objects
         this.json = json;
     },
+
     /*
      * An item can be removed by calling the following method: shopping.removeItem({ product ID })
      * Keep in mind that the used id must exists within the json file AND the product slider. It is used as index.
+     *
+     * @param int id
+     * @return boolean
      */
     removeItem: function(id) {
         // Check if id is empty
@@ -172,29 +183,37 @@ var shopping = {
 
             return false;
         }
+        // Check if entry exists
         if(!this.json[id]) {
             console.log('Entry ' + id + ' not found');
 
             return false;
         }
-        
-        // Update amount
-        itemAmount = parseFloat(this.json[id].price.amount.replace(',', '.'));
-        this.totalAmount = this.updateTotalAmount(parseFloat(this.totalAmount - itemAmount).toFixed(2));
 
-        // Kill it with fire
-        this.productSlider.removeSlide(id);
+        $('.swiper-slide#' + id).addClass('animated bounceOut');
+        $('.swiper-slide#' + id).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+            // Go to previous slide
+            this.productSlider.slidePrev();
 
-        // Go to last slide
-        this.productSlider.slidePrev();
+            // Kill it with fire
+            this.productSlider.removeSlide(id);
 
-        console.log('Product item ' + id + ' removed');
+            console.log('Product item ' + id + ' removed');
+
+            // Update amount
+            itemAmount = parseFloat(this.json[id].price.amount.replace(',', '.'));
+            this.totalAmount = this.updateTotalAmount(parseFloat(this.totalAmount - itemAmount).toFixed(2));
+        }.bind(this));
 
         return true;
     },
+
     /*
      * A new item can be added by calling the following method: shopping.addItem({ product ID })
      * Keep in mind that the used id must exists within the json file
+     *
+     * @param int id
+     * @return boolean
      */
     addItem: function(id) {
         // Check if id is empty
@@ -203,6 +222,7 @@ var shopping = {
 
             return false;
         }
+        // Check if entry exists
         if(!this.json[id]) {
             console.log('Entry ' + id + ' not found');
 
@@ -215,20 +235,34 @@ var shopping = {
                        '<span class="price">€' + this.json[id].price.amount + ' <small>p.s.</small></span>' +
                        '</div>';
 
+        // Append to slide
+        this.productSlider.appendSlide(itemNode);
+        $('.swiper-slide#' + this.productSlider.slides.length).hide(0);
+
+        console.log('Product item ' + id + ' added');
+
         // Update amount
         itemAmount = parseFloat(this.json[id].price.amount.replace(',', '.'));
         this.totalAmount = this.updateTotalAmount(parseFloat(this.totalAmount + itemAmount).toFixed(2));
 
-        // Append to slide
-        this.productSlider.appendSlide(itemNode);
-
         // Go to last slide
         this.productSlider.slideTo(this.productSlider.slides.length);
 
-        console.log('Product item ' + id + ' added');
+        this.productsWrapper.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+            //$('.swiper-slide#' + this.productSlider.slides.length).show();
+            $('.swiper-slide#' + this.productSlider.slides.length).addClass('animated bounceIn');
+        }.bind(this));
 
         return true;
     },
+
+    /*
+     * Amount can be updated by calling the following method: shopping.updateTotalAmount({ (int) amount })
+     * Keep in mind that substracts and sum requires an integer (parseFloat())
+     *
+     * @param int amount
+     * @return int amount
+     */
     updateTotalAmount: function(amount) {
         // Update total price
         $('.total-price').html('€ ' + amount.toString().replace('.', ','));
@@ -237,17 +271,19 @@ var shopping = {
 
         return amount;
     }
-}
+};
 
 /*
  * Debug logic
+ *
+ * @return object pub
  */
 var logger = function() {
     var oldConsoleLog = null;
     var pub = {};
 
     pub.enableLogger = function enableLogger() {
-        if(oldConsoleLog == null)
+        if(oldConsoleLog === null)
             return;
 
         window['console']['log'] = oldConsoleLog;
