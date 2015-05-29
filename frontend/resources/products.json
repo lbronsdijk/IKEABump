@@ -34,5 +34,23 @@
             {
                 "amount" : "21,90"
             }
+    },
+    {
+        "id": "4",
+        "name": "Upleva",
+        "image": "bed.jpg",
+        "price": 
+            {
+                "amount" : "179,98"
+            }
+    },
+    {
+        "id": "5",
+        "name": "Loesje",
+        "image": "chair.jpg",
+        "price": 
+            {
+                "amount" : "24,79"
+            }
     }
 ]

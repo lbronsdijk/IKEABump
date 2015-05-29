@@ -147,7 +147,7 @@ var shopping = {
         });
 
         // Loop data
-        $.each(json, function() {
+        $.each(json.slice(0,4), function() {
             var itemNode = '<div class="swiper-slide" id="' + this.id + '">' +
                            '<span class="product-name">' + this.name + '</span>' +
                            '<div class="mask"><img src="resources/images/' + this.image + '"></div>' +
@@ -178,7 +178,7 @@ var shopping = {
      */
     removeItem: function(id) {
         // Check if id is empty
-        if(!id) {
+        if(typeof id === 'undefined') {
             console.log('No id entered');
 
             return false;
@@ -202,7 +202,7 @@ var shopping = {
 
             // Update amount
             itemAmount = parseFloat(this.json[id].price.amount.replace(',', '.'));
-            this.totalAmount = this.updateTotalAmount(parseFloat(this.totalAmount - itemAmount).toFixed(2));
+            this.totalAmount = this.updateTotalAmount((parseFloat(this.totalAmount) - parseFloat(itemAmount)).toFixed(2));
         }.bind(this));
 
         return true;
@@ -217,7 +217,7 @@ var shopping = {
      */
     addItem: function(id) {
         // Check if id is empty
-        if(!id) {
+        if(typeof id === 'undefined') {
             console.log('No id entered');
 
             return false;
@@ -239,11 +239,10 @@ var shopping = {
         this.productSlider.appendSlide(itemNode);
         $('.swiper-slide#' + this.productSlider.slides.length).hide(0);
 
-        console.log('Product item ' + id + ' added');
-
         // Update amount
         itemAmount = parseFloat(this.json[id].price.amount.replace(',', '.'));
-        this.totalAmount = this.updateTotalAmount(parseFloat(this.totalAmount + itemAmount).toFixed(2));
+        this.totalAmount = this.updateTotalAmount((parseFloat(this.totalAmount) + parseFloat(itemAmount)).toFixed(2));
+
 
         // Go to last slide
         this.productSlider.slideTo(this.productSlider.slides.length);
@@ -252,6 +251,8 @@ var shopping = {
             //$('.swiper-slide#' + this.productSlider.slides.length).show();
             $('.swiper-slide#' + this.productSlider.slides.length).addClass('animated bounceIn');
         }.bind(this));
+
+        console.log('Product item ' + id + ' added');
 
         return true;
     },
