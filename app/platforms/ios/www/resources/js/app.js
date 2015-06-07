@@ -68,45 +68,241 @@ var app = {
         $('.food').bind('tap', function() {
             window.open('http://wessalicious.com/wp-content/uploads/2014/12/Vegetarische-zweedse-balletjes2.jpg');
         });
-    }
-};
-
-var shoppingCartOverview = { 
-    initialize: function() {
         
-        var products = $('.swiper-container');
-        var amount = 0;
-
-        $('.swiper-wrapper').empty();
+        $('#add-item').bind('tap', function(){
+            var id = parseInt(shoppingCartOverview.productSlider.slides[shoppingCartOverview.productSlider.slides.length - 1].id) + 1;
+            shoppingCartOverview.addItem(id);
+        });
         
-        $.get("http://lloydkeijzer.nl/products.json", function(json){
+        $('#delete-item').bind('tap', function(){
+            shoppingCartOverview.removeItem(shoppingCartOverview.productSlider.slides[shoppingCartOverview.getActiveIndex()].id);
+        });
+        
+        $('#vibrate').bind('tap', function(){
+            var vibration = new Vibration();
+            vibration.play(0, false);
+        });
+        
+        var vibration = new Vibration();
+        var loop = false;
+        
+        $('#vibrate-loop').bind('tap', function(){
+
+            if(loop){
+                vibration.stop();
+                loop = false;
+                $('#vibrate-loop').text('Start Vibrate Loop');
+            } else {
+                vibration.play(1000, true);
+                loop = true;
+                $('#vibrate-loop').text('Stop Vibrate Loop');
+            }
             
-            $.each(json, function() {
-                
-                var itemNode =  '<div class="swiper-slide" id="' + this.id + '">' +
-                                    '<span class="product-name">' + this.name + '</span>' +
-                                    '<div class="mask"><img src="resources/images/' + this.image + '"></div>' +
-                                    '<span class="price">€' + this.price.amount + ' <small>p.s.</small></span>' +
-                                '</div>';
-                $('.swiper-wrapper').append(itemNode);
-
-                amount += parseFloat(this.price.amount.replace(',', '.'));
-            });
-
-            $('.total-price').html('€ ' + amount.toString().replace('.', ','));
-
-            this.amount = amount;
-            this.productSlider = products.swiper({
-                mode:'horizontal',
-                loop: false
-            });
-        }, "json");
-    },
-    removeItem: function() {
-        console.log('derp');
-        //$('.swiper-slide#1').remove();
+        });
     }
 };
+
+var shoppingCartOverview = {
+
+    /*
+     * Initialize shopping card
+     */
+    initialize: function() {
+        var amount = 0;
+        var json;
+        this.productsContainer = $('.swiper-container');
+        this.productsWrapper = $('.swiper-wrapper');
+
+        // Fill and call product slider object
+        this.productSlider = this.productsContainer.swiper({
+            mode:'horizontal',
+            loop: false
+        });
+
+        // Fill var product slider for eachloop
+        var productSlider = this.productSlider;
+
+        // Clear out shopping list
+        this.productSlider.removeAllSlides();
+
+        // Get some data
+        $.ajax({
+            type: 'GET',
+            async: false,
+            url: 'http://lloydkeijzer.nl/products.json',
+            dataType: 'json',
+//            contentType: 'application/json',
+            success: function (data) {
+                json = data;
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                console.log('Request shoppinglist failed: ' + errorThrown);
+            }
+        });
+
+        // Loop data
+        $.each(json.slice(0,4), function() {
+            var itemNode = '<div class="swiper-slide" id="' + this.id + '">' +
+                           '<span class="product-name">' + this.name + '</span>' +
+                           '<div class="mask"><img src="resources/images/' + this.image + '"></div>' +
+                           '<span class="price">€' + this.price.amount + ' <small>p.s.</small></span>' +
+                           '</div>';
+
+            // Append to slide
+            productSlider.appendSlide(itemNode);
+
+            // Fill and count total amount 
+            amount += parseFloat(this.price.amount.replace(',', '.'));
+        });
+
+        console.log('All products inserted');
+
+        // Update amount
+        this.totalAmount = this.updateTotalAmount(amount);
+        // Fill objects
+        this.json = json;
+    },
+
+    /*
+     * An item can be removed by calling the following method: shopping.removeItem({ product ID })
+     * Keep in mind that the used id must exists within the json file AND the product slider. It is used as index.
+     *
+     * @param int id
+     * @return boolean
+     */
+    removeItem: function(id) {
+        // Check if id is empty
+        if(typeof id === 'undefined') {
+            console.log('No id entered');
+
+            return false;
+        }
+        // Check if entry exists
+        if(!this.json[id]) {
+            console.log('Entry ' + id + ' not found');
+
+            return false;
+        }
+
+        $('.swiper-slide#' + id).addClass('animated bounceOut');
+        $('.swiper-slide#' + id).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+            // Go to previous slide
+            this.productSlider.slidePrev();
+
+            // Kill it with fire
+            this.productSlider.removeSlide(id);
+
+            
+            var vibration = new Vibration();
+            vibration.play(0, false);
+            
+            var vibration2 = new Vibration();
+            vibration2.play(1000, false);
+            
+            console.log('Product item ' + id + ' removed');
+
+            // Update amount
+            itemAmount = parseFloat(this.json[id].price.amount.replace(',', '.'));
+            this.totalAmount = this.updateTotalAmount((parseFloat(this.totalAmount) - parseFloat(itemAmount)).toFixed(2));
+        }.bind(this));
+        
+        return true;
+    },
+
+    /*
+     * A new item can be added by calling the following method: shopping.addItem({ product ID })
+     * Keep in mind that the used id must exists within the json file
+     *
+     * @param int id
+     * @return boolean
+     */
+    addItem: function(id) {
+        // Check if id is empty
+        if(typeof id === 'undefined') {
+            console.log('No id entered');
+
+            return false;
+        }
+        // Check if entry exists
+        if(!this.json[id]) {
+            console.log('Entry ' + id + ' not found');
+
+            return false;
+        }
+
+        var itemNode = '<div class="swiper-slide" id="' + this.json[id].id + '">' +
+                       '<span class="product-name">' + this.json[id].name + '</span>' +
+                       '<div class="mask"><img src="resources/images/' + this.json[id].image + '"></div>' +
+                       '<span class="price">€' + this.json[id].price.amount + ' <small>p.s.</small></span>' +
+                       '</div>';
+
+        // Append to slide
+        this.productSlider.appendSlide(itemNode);
+        $('.swiper-slide#' + this.productSlider.slides.length).hide(0);
+
+        // Update amount
+        itemAmount = parseFloat(this.json[id].price.amount.replace(',', '.'));
+        this.totalAmount = this.updateTotalAmount((parseFloat(this.totalAmount) + parseFloat(itemAmount)).toFixed(2));
+
+
+        // Go to last slide
+        this.productSlider.slideTo(this.productSlider.slides.length);
+
+        this.productsWrapper.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
+            //$('.swiper-slide#' + this.productSlider.slides.length).show();
+            $('.swiper-slide#' + this.productSlider.slides.length).addClass('animated bounceIn');
+        }.bind(this));
+
+        var vibration = new Vibration();
+        vibration.play(0, false);
+        
+        console.log('Product item ' + id + ' added');
+
+        return true;
+    },
+
+    /*
+     * Amount can be updated by calling the following method: shopping.updateTotalAmount({ (int) amount })
+     * Keep in mind that substracts and sum requires an integer (parseFloat())
+     *
+     * @param int amount
+     * @return int amount
+     */
+    updateTotalAmount: function(amount) {
+        // Update total price
+        $('.total-price').html('€ ' + amount.toString().replace('.', ','));
+
+        console.log('Amount updated: €' + amount);
+
+        return amount;
+    },
+    getActiveIndex: function(){
+    
+        return this.productSlider.activeIndex;
+    }
+};
+
+/*
+ * Debug logic
+ */
+var logger = function() {
+    var oldConsoleLog = null;
+    var pub = {};
+
+    pub.enableLogger = function enableLogger() {
+        if(oldConsoleLog == null)
+            return;
+
+        window['console']['log'] = oldConsoleLog;
+    };
+
+    pub.disableLogger = function disableLogger() {
+        oldConsoleLog = console.log;
+        window['console']['log'] = function() {};
+    };
+
+    return pub;
+}();
 
 Modernizr.load(
 {
