@@ -5,9 +5,7 @@ Modernizr.load(
 {
     load: 
     [  
-        'resources/js/vendor/jquery.min.js',
-        'resources/js/vendor/jquery.swiper.min.js',
-        'resources/js/vendor/fastclick.min.js'
+        'resources/js/vendor/vendor.min.js'
     ],
     complete: function()
     {
