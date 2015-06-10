@@ -30,6 +30,9 @@ var app = {
         // Init shopping bag
         shopping.initialize();
 
+        // Init time
+        app.currentTime(0);
+
         $(document).ready(function()
         {   
             // Set fast scroll for mobile devices. Removes delay on click.
@@ -100,6 +103,17 @@ var app = {
                 window.open('http://wessalicious.com/wp-content/uploads/2014/12/Vegetarische-zweedse-balletjes2.jpg');
             });
         });
+    },
+    currentTime: function(delay) {
+        setTimeout(function(){ 
+            // Current time
+            var DateTime = new Date();
+            var currentTime = DateTime.getHours() + ":" + DateTime.getMinutes();
+
+            $('.time span').html(currentTime);
+
+            app.currentTime(60000);
+        }, delay); 
     }
 };
 
